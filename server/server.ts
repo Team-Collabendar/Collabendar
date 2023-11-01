@@ -13,7 +13,9 @@ const eventRoute = require('./routes/eventRoute');
 // const {} = require('eventControllers');
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+
 app.use(express.static(path.join(__dirname, '../dist')));
 app.use('/globals.css', express.static(path.join(__dirname, '../client/globals.css')))
 
