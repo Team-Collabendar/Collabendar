@@ -1,15 +1,20 @@
 import React, { Fragment, useEffect, useRef } from 'react'
 import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon, EllipsisHorizontalIcon } from '@heroicons/react/20/solid'
 import { Menu, Transition } from '@headlessui/react'
-
+import { useDispatch, useSelector} from 'react-redux';
+import { addEvent } from '../reducers/eventsSlice';
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 console.log('hello');
 export default function Example() {
+  const dispatch = useDispatch();
   const container = useRef(null)
   const containerNav = useRef(null)
   const containerOffset = useRef(null)
+  const stateEvents = useSelector(state => state.events.eventsList);
+
+
 
   useEffect(() => {
     // Set the container scroll position based on the current time.
@@ -19,6 +24,57 @@ export default function Example() {
         currentMinute) /
       1440
   }, [])
+
+  function addEventObj(hour, length, label, day) {
+    dispatch(addEvent({hour: hour, length: length, label: label, day: day}));
+    console.log('added event');
+  }
+
+
+  const eventArray = stateEvents.map((event) => {
+    const testNum = 2;
+    let generatedClassName = '';
+    console.log(event.day);
+    switch (String(event.day)) {
+      case '1':
+        generatedClassName = "relative mt-px flex sm:col-start-1";
+        break;
+      case '2':
+        generatedClassName = "relative mt-px flex sm:col-start-2";
+        break;
+      case '3':
+        generatedClassName = "relative mt-px flex sm:col-start-3";
+        break;
+      case '4':
+        generatedClassName = "relative mt-px flex sm:col-start-4";
+        break;
+      case '5':
+        generatedClassName = "relative mt-px flex sm:col-start-5";
+        break;
+      case '6':
+        generatedClassName = "relative mt-px flex sm:col-start-6";
+        break;
+      case '7':
+        generatedClassName = "relative mt-px flex sm:col-start-7";
+        break;
+      default:
+        generatedClassName = "relative mt-px flex sm:col-start-1";
+        break;
+    }
+    return (
+      <li className={generatedClassName} style={{ gridRow: `${(event.hour * 12) + 2} / span ${event.length * 12}` }}>
+        <a
+          href="#"
+          className="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-blue-50 p-2 text-xs leading-5 hover:bg-blue-100"
+        >
+          <p className="order-1 font-semibold text-blue-700">{event.label}</p>
+          <p className="text-blue-500 group-hover:text-blue-700">
+            <time dateTime="2022-01-12T06:00">{`${event.hour} o'clock`}</time>
+          </p>
+        </a>
+      </li>
+    )
+  })
 
   return (
     <div className="flex h-full flex-col">
@@ -131,6 +187,7 @@ export default function Example() {
             <button
               type="button"
               className="ml-6 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              onClick={() => addEventObj(14,4,'Cry', 4)}
             >
               Add event
             </button>
@@ -487,39 +544,7 @@ export default function Example() {
                 className="col-start-1 col-end-2 row-start-1 grid grid-cols-1 sm:grid-cols-7 sm:pr-8"
                 style={{ gridTemplateRows: '1.75rem repeat(288, minmax(0, 1fr)) auto' }}
               >
-                <li className="relative mt-px flex sm:col-start-3" style={{ gridRow: '74 / span 12' }}>
-                  <a
-                    href="#"
-                    className="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-blue-50 p-2 text-xs leading-5 hover:bg-blue-100"
-                  >
-                    <p className="order-1 font-semibold text-blue-700">Breakfast</p>
-                    <p className="text-blue-500 group-hover:text-blue-700">
-                      <time dateTime="2022-01-12T06:00">6:00 AM</time>
-                    </p>
-                  </a>
-                </li>
-                <li className="relative mt-px flex sm:col-start-3" style={{ gridRow: '92 / span 30' }}>
-                  <a
-                    href="#"
-                    className="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-pink-50 p-2 text-xs leading-5 hover:bg-pink-100"
-                  >
-                    <p className="order-1 font-semibold text-pink-700">Flight to Paris</p>
-                    <p className="text-pink-500 group-hover:text-pink-700">
-                      <time dateTime="2022-01-12T07:30">7:30 AM</time>
-                    </p>
-                  </a>
-                </li>
-                <li className="relative mt-px hidden sm:col-start-6 sm:flex" style={{ gridRow: '122 / span 24' }}>
-                  <a
-                    href="#"
-                    className="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-gray-100 p-2 text-xs leading-5 hover:bg-gray-200"
-                  >
-                    <p className="order-1 font-semibold text-gray-700">Meeting with design team at Disney</p>
-                    <p className="text-gray-500 group-hover:text-gray-700">
-                      <time dateTime="2022-01-15T10:00">10:00 AM</time>
-                    </p>
-                  </a>
-                </li>
+                {eventArray}
               </ol>
             </div>
           </div>
