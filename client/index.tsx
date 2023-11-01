@@ -5,9 +5,14 @@ import { store } from './store'
 import { Provider } from 'react-redux'
 import './globals.css'
 
+
+
+
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <div>
+      <App />
+    </div>
   </Provider>,
   document.getElementById('root')
 )

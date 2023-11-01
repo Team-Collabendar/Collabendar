@@ -7,7 +7,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const path = require('path');
-const PORT = 3000;
+const PORT = 3001;
 
 app.use(express.json());
 app.use(cors());
@@ -17,6 +17,13 @@ app.use('/globals.css', express.static(path.join(__dirname, '../client/globals.c
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist', 'index.html'));
 });
+
+
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist', 'index.html'));
+});
+
+
 
 // GLOBAL ERROR HANDLER
 app.use((req, res) => res.status(404).send("This is not the page you're looking for..."));
