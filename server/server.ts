@@ -8,9 +8,9 @@ const calendarRoute = require('./routes/calendarRoute');
 const userRoute = require('./routes/userRoute');
 const eventRoute = require('./routes/eventRoute');
 
-const {} = require('calendarControllers');
-const {} = require('userControllers');
-const {} = require('eventControllers');
+// const {} = require('calendarControllers');
+// const {} = require('userControllers');
+// const {} = require('eventControllers');
 
 app.use(express.json());
 app.use(cors());
@@ -48,3 +48,5 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
 });
+
+module.exports = { app };

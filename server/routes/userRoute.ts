@@ -1,29 +1,25 @@
-const express = require('express');
-const router = express.Router();
+const userExpress = require('express');
+const userRouter = userExpress.Router();
 
-
-
-router.get('/', (req, res) => {
+userRouter.get('/', (req, res) => {
   return res.status(200).json({})
 })
 
 //create user
-router.post('/', (req, res) => {
+userRouter.post('/', (req, res) => {
   return res.status(200).json({})
 })
   
 //PATCH users --> remove calendar ForeignID from a user's profile in database - when they click toremove that calendar from their profileapp.patch('user', (req, res) => {
-router.patch('/', (req, res) => {
+userRouter.patch('/', (req, res) => {
   return res.status(200).json({})
 })
 
-router.delete('/', (req, res) => {
+userRouter.delete('/', (req, res) => {
   return res.status(200).json({})
 })
 
 
 
-
-
-module.exports = router;
+module.exports = userRouter;
   
