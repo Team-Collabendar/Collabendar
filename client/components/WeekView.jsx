@@ -7,6 +7,7 @@ import InviteModal from './InviteModal'
 import { useState } from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import { addEvent } from '../reducers/eventsSlice';
+import CreateEventModal from './CreateEventModal';
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
@@ -51,10 +52,6 @@ export default function Example() {
     return
   };
 
-  function addEventObj(hour, length, label, day) {
-    dispatch(addEvent({hour: hour, length: length, label: label, day: day}));
-  }
-  
   const eventArray = stateEvents.map((event) => {
     const testNum = 2;
     let generatedClassName = '';
@@ -111,9 +108,16 @@ export default function Example() {
             <button
               type="button"
               className="ml-6 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              onClick={() => setIsOpenEvent(true)}
             >
               Add event
             </button>
+            <div>
+            <CreateEventModal 
+              openCheck = {isOpenEvent}
+              onClose={() => setIsOpenEvent(false)}
+            />
+          </div>
             <div className="ml-6 h-6 w-px" /> 
 
             <button
