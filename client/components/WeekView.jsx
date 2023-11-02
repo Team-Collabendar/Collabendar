@@ -51,7 +51,9 @@ export default function Example() {
     return
   };
 
-
+  function addEventObj(hour, length, label, day) {
+    dispatch(addEvent({hour: hour, length: length, label: label, day: day}));
+  }
   
   const eventArray = stateEvents.map((event) => {
     const testNum = 2;
