@@ -1,5 +1,5 @@
 import React from 'react';
-import { api } from '../utils/api';
+import api from '../utils/api';
 
 export default function CreateCollabendarModal({ openCheck, onClose }) {
     async function handleSubmit(event) {

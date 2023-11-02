@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useRef } from 'react';
 import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon, EllipsisHorizontalIcon } from '@heroicons/react/20/solid';
 import { Menu, Transition } from '@headlessui/react';
-import { api } from '../utils/api';
+import api from '../utils/api';
 import CreateCollabendarModal from './CreateCollabendar';
 import InviteModal from './InviteModal'
 import { useState } from 'react';
