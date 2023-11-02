@@ -35,7 +35,7 @@ export default function Example() {
     try {
       if (cmd) console.log('The command is',cmd);
       if (cmd === 'createCollab') setIsOpenCollab(true);
-      if (cmd === 'invite') await api.invite();
+      if (cmd === 'invite') setIsOpenInvite(true);
       if (cmd === 'logout') await api.logout();
 
     } catch (error) {
@@ -283,6 +283,12 @@ export default function Example() {
             <CreateCollabendarModal 
               openCheck = {isOpenCollab}
               onClose={() => setIsOpenCollab(false)}
+            />
+          </div>
+          <div>
+            <InviteModal 
+              openCheck = {isOpenInvite}
+              onClose={() => setIsOpenInvite(false)}
             />
           </div>
 
