@@ -2,7 +2,6 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 
-
 const express = require('express');
 const app = express();
 const cors = require('cors');
@@ -12,20 +11,53 @@ const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
 const methodOverride = require('method-override')
-// const GoogleStrategy = require('passport-google-oidc');
-
-
 const bcrypt = require('bcrypt');
-
 const initializePassport = require('./passport.config')
+import database from './database';
+
+
+// initializePassport(
+//   passport,
+//   email =>  users.find(user => user.email === email),
+//   id => users.find(user => user.id === id)
+// )
+// initializePassport(
+//   passport,
+//   async (email) => {
+//         const user = await database.query(`SELECT * FROM users WHERE username = '${email}'`);
+//         return user.rows[0].username; 
+//       },
+//   id => users.find(user => user.id === id)
+// )
+
+// async function test (){
+//   const emailArr = await database.query(`SELECT * FROM users WHERE username = '${email}'`)
+//   console.log(emailArr.rows[0].username);
+//   return emailArr.rows[0].username
+// }
+// test();
+
+// initializePassport(
+//   passport,
+//   async (email) => {
+//     const user = await database.query(`SELECT * FROM users WHERE username = '${email}'`);
+//     return user.rows[0].username; // Assuming the first row is the user
+//   },
+//   (id) => {
+//     // Replace this with your actual logic to find a user by their ID
+//     return users.find((user) => user.id === id);
+//   }
+// );
+
+
 
 initializePassport(
   passport,
-  email => users.find(user => user.email === email),
+  email =>  users.find(user => user.email === email),
   id => users.find(user => user.id === id)
 )
-
 const users = [];
+
 
 app.use(express.urlencoded({extended : false}))
 app.use(flash())
@@ -43,38 +75,29 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
 
-app.get('/',checkAuthenticated, (req, res) => {
+app.get('/', checkAuthenticated, async (req, res) => {
   res.sendFile(path.join(__dirname, '../dist', 'index.html'));
 });
+
 
 app.get('/home',checkAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, '../dist', 'index.html'));
 });
 
-// app.get('/login/federated/google', passport.authenticate('google'));
-
-
-// app.get('/login',checkNotAuthenticated, (req, res) => {
-//   res.sendFile(path.join(__dirname, '../dist', 'index.html'));
-
-// });
 
 app.get('/',checkNotAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, '../dist', 'index.html'));
 
 });
 
-// app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
-//   successRedirect: '/',
-//   failureRedirect: '/login',
-//   failureFlash: true
-// }))
 
-app.post('/', checkNotAuthenticated, passport.authenticate('local', {
+app.post('/', checkNotAuthenticated, passport.authenticate('local',  {
   successRedirect: '/home',
   failureRedirect: '/',
   failureFlash: true
-}))
+})
+)
+
 
 app.get('/register',checkNotAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, '../dist', 'index.html'));
@@ -84,13 +107,20 @@ app.get('/register',checkNotAuthenticated, (req, res) => {
 app.post('/register', checkNotAuthenticated, async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
+   
+    const username = req.body.email;
+    
+    let sent = `INSERT INTO users(username, password) VALUES ($1, $2)`
+    let val = [username, hashedPassword]
+    database.query(sent, val)
+    
+
     users.push({
       id : Date.now().toString(),
       email : req.body.email,
       password : hashedPassword
     })
 
-    // res.redirect('/login')
     res.redirect('/')
   } catch (error) {
     res.redirect('/register')
@@ -100,19 +130,11 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
 });
 
 app.delete('/logout', (req, res) => {
-  // Perform any necessary cleanup or additional actions before logging out
-  // ...
-
-  // Use req.logOut with a callback function
   req.logOut((err) => {
     if (err) {
-      // Handle any error that occurred during logout
       console.error(err);
       return res.status(500).send('Error logging out');
     }
-
-    // Redirect the user to the login page after successful logout
-    // res.redirect('/login');
     res.redirect('/');
   });
 });
@@ -123,7 +145,6 @@ function checkAuthenticated(req, res, next) {
     return next()
   }
 
-  // res.redirect('/login')
   res.redirect('/')
 
 }
@@ -135,9 +156,12 @@ function checkNotAuthenticated(req, res, next) {
   next()
 }
 
-// GLOBAL ERROR HANDLER
+
+// GLOBAL ROUTE HANDLER
 app.use((req, res) => res.status(404).send("This is not the page you're looking for..."));
 
+
+// GLOBAL ERROR HANDLER
 app.use((err, req, res, next) => {
   console.log('ERROR HERE: ', err);
   const defaultErr = {
