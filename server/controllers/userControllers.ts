@@ -5,7 +5,6 @@ const userControllers: any = {}
 
 
 userControllers.createUser = (req, res, next) => {
-//IF(some req.body.name exists){.......}
   let text = 'INSERT INTO user(userName, password) VALUES($1,$2) RETURNING *'
   let values = [req.body.userName, ]
   db.query(text, values, (err, result)=> {

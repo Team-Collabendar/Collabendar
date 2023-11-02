@@ -20,6 +20,10 @@ calendarRouter.get('/userCalendars', calendar.getCalendarsByUser, (req, res, nex
 })
 
 
+calendarRouter.put('/invite', calendar.addUser, (req,res,next) => {
+})
+
+
     //here we also use "getCalByUser" because we want to immediately send the updated list to the front end
 calendarRouter.patch('/', calendar.removeUser, calendar.getCalendarsByUser, (req, res, next) => {
   return res.status(200).json(res.locals.calendarsByUser);

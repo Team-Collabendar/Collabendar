@@ -15,6 +15,10 @@ const calendarRoute = require('./routes/calendarRoute');
 const userRoute = require('./routes/userRoute');
 const eventRoute = require('./routes/eventRoute');
 
+app.use('/calendar', calendarRoute);
+app.use('/user', userRoute);
+app.use('/event', eventRoute);
+
 
 app.use(express.urlencoded({extended : false}))
 app.use(express.json());
@@ -104,4 +108,4 @@ app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
 });
 
-module.exports = { app };
+

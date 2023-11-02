@@ -5,10 +5,9 @@ const eventControllers: any = {}
 
 
 eventControllers.createEvent = (req, res, next) => {
-  //CONDITIONAL LOGIC / ALL REQ.BODY IS GONNA BE A LITTLE NESTED. that's cool
   if (req.body.event){
-    const text = "INSER INTO events (title, description, date, start_time, end_time, creating_user) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *"
-    const values = [req.body.title, req.body.description, req.body.date, req.start_time, req.end_time, req.creating_user]
+    const text = "INSER INTO events (title, date, start_time, duration, calendar_id) VALUES ($1, $2, $3, $4, $5) RETURNING *"
+    const values = [req.body.label, req.body.day, req.body.hour, req.body.length, req.body.id]
     db.query(text, values, (err, result)=> {
         if (err){
           const error = {log: `ERROR occured on "createEvent" middleware with req.body.event = ${req.body.event}`, status: 500, message: "an error occured creating calendar event! (all event fields are REQUIRED)"}
@@ -21,6 +20,22 @@ eventControllers.createEvent = (req, res, next) => {
     })
   }
 }
+
+
+eventControllers.getAllEvents = (req, res, next) => {
+    const text = "SELECT * FROM events" 
+    db.query(text, (err, result)=> {
+      if (err){
+        const error = {log: `ERROR occured on "getAllEvents" middleware with req.body.cal = ${req.body.cal}`, status: 500, message: "an error occured getting calendar events"}
+        return next(error);
+      }
+      else{
+        res.locals.events = result.rows;
+        return next();
+      }
+    })
+}
+
 
 
 eventControllers.getEventsByCal = (req, res, next) => {
