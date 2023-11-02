@@ -15,7 +15,6 @@ const [eventName, setEventName] = useState('');
         dispatch(addEvent({hour: hour, length: length, label: label, day: day}));
     }
       
-
     async function handleSubmit(event) {
         const allCookies = document.cookie;
         const myCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('user_id='));
@@ -24,9 +23,9 @@ const [eventName, setEventName] = useState('');
         const data = {
             label: eventName,
             hour: Number(eventStart) + Number(amPm),
-            day: eventDay,
-            length: eventDuration,
-            id: cookieValue
+            day: eventDay, //day represented by num 1-7, integer
+            length: eventDuration, //how long the event is, number with deciaml
+            id: cookieValue //id of callendar
         }
         addEventObj(data.hour, data.length, data.label, data.day);
         dispatch(addEvent({ eventName, eventStart, eventDay, eventDuration }));

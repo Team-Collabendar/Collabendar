@@ -6,7 +6,7 @@ import CreateCollabendarModal from './CreateCollabendar';
 import InviteModal from './InviteModal'
 import { useState } from 'react';
 import { useDispatch, useSelector} from 'react-redux';
-import { addEvent } from '../reducers/eventsSlice';
+import { addEvent, setEventList } from '../reducers/eventsSlice';
 import CreateEventModal from './CreateEventModal';
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -26,6 +26,7 @@ for (let i = 0; i < 7; i++) {
     newDate.setDate(startOfWeek.getDate() + i);
     dates.push(newDate.toLocaleDateString('en-US', { day: 'numeric' }));
 }
+let eventReq = [];
 
 export default function Example() {
   const [isOpenEvent, setIsOpenEvent] = useState(false);
@@ -39,9 +40,15 @@ export default function Example() {
   const containerOffset = useRef(null)
   const stateEvents = useSelector(state => state.events.eventsList);
 
-
+  async function getEvents() {
+    eventReq = await api.getEvents()
+    setEventList(eventReq)
+    console.log(stateEvents)
+  }
 
   useEffect(() => {
+    getEvents();
+
     // Set the container scroll position based on the current time.
     const currentMinute = new Date().getHours() * 60
     container.current.scrollTop =
