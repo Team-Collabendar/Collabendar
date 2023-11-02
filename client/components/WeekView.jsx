@@ -10,6 +10,21 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
+const currentDate = new Date();
+const year = currentDate.getFullYear();
+const month = currentDate.toLocaleString('default', { month: 'long' });
+const currentMonthYear = `${month} ${year}`;
+
+const today = currentDate.getDay(); // Get the current day of the week (0 - Sunday, 1 - Monday, ..., 6 - Saturday)
+const diff = currentDate.getDate() - today + (today === 0 ? -6 : 0); // Adjust the start of the week to Sunday
+const startOfWeek = new Date(currentDate.setDate(diff));
+const dates = [];
+for (let i = 0; i < 7; i++) {
+    const newDate = new Date(startOfWeek);
+    newDate.setDate(startOfWeek.getDate() + i);
+    dates.push(newDate.toLocaleDateString('en-US', { day: 'numeric' }));
+}
+console.log(today);
 export default function Example() {
   const [isOpenCollab, setIsOpenCollab] = useState(false);
   const [isOpenInvite, setIsOpenInvite] = useState(false);
@@ -43,7 +58,7 @@ export default function Example() {
     }
     return
   };
-
+  //THIS ARRAY IS THE LIST OF EVENTS TO BE DISPLAYED 
   const eventArray = [
     <li className="relative mt-px flex sm:col-start-3" style={{ gridRow: '74 / span 12' }}>
     <a
@@ -84,7 +99,7 @@ export default function Example() {
     <div className="flex h-full flex-col">
       <header className="flex flex-none items-center justify-between border-b border-gray-200 px-6 py-4">
         <h1 className="text-base font-semibold leading-6 text-gray-900">
-          <time dateTime="2022-01">January 2022</time>
+          <time dateTime="2022-01">{currentMonthYear}</time>
         </h1>
         <div className="flex items-center">
           <div className="relative flex items-center rounded-md bg-white shadow-sm md:items-stretch">
@@ -433,69 +448,70 @@ export default function Example() {
           >
             <div className="grid grid-cols-7 text-sm leading-6 text-gray-500 sm:hidden">
               <button type="button" className="flex flex-col items-center pb-3 pt-2">
-                M <span className="mt-1 flex h-8 w-8 items-center justify-center font-semibold text-gray-900">10</span>
+                S <span className={`mt-1 flex h-8 w-8 items-center justify-center ${today === 7 ? "rounded-full bg-indigo-600 font-semibold text-white" : "font-semibold text-gray-900"}`}>{dates[0]}</span>
               </button>
               <button type="button" className="flex flex-col items-center pb-3 pt-2">
-                T <span className="mt-1 flex h-8 w-8 items-center justify-center font-semibold text-gray-900">11</span>
+                M <span className={`mt-1 flex h-8 w-8 items-center justify-center ${today === 1 ? "rounded-full bg-indigo-600 font-semibold text-white" : "font-semibold text-gray-900"}`}>{dates[1]}</span>
               </button>
               <button type="button" className="flex flex-col items-center pb-3 pt-2">
-                W{' '}
-                <span className="mt-1 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white">
-                  12
-                </span>
+                T <span className={`mt-1 flex h-8 w-8 items-center justify-center ${today === 2 ? "rounded-full bg-indigo-600 font-semibold text-white" : "font-semibold text-gray-900"}`}>{dates[2]}</span>
               </button>
               <button type="button" className="flex flex-col items-center pb-3 pt-2">
-                T <span className="mt-1 flex h-8 w-8 items-center justify-center font-semibold text-gray-900">13</span>
+                W <span className={`mt-1 flex h-8 w-8 items-center justify-center ${today === 3 ? "rounded-full bg-indigo-600 font-semibold text-white" : "font-semibold text-gray-900"}`}>{dates[3]}</span>
               </button>
               <button type="button" className="flex flex-col items-center pb-3 pt-2">
-                F <span className="mt-1 flex h-8 w-8 items-center justify-center font-semibold text-gray-900">14</span>
+                T <span className={`mt-1 flex h-8 w-8 items-center justify-center ${today === 4 ? "rounded-full bg-indigo-600 font-semibold text-white" : "font-semibold text-gray-900"}`}>{dates[4]}</span>
               </button>
               <button type="button" className="flex flex-col items-center pb-3 pt-2">
-                S <span className="mt-1 flex h-8 w-8 items-center justify-center font-semibold text-gray-900">15</span>
+                F <span className={`mt-1 flex h-8 w-8 items-center justify-center ${today === 5 ? "rounded-full bg-indigo-600 font-semibold text-white" : "font-semibold text-gray-900"}`}>{dates[5]}</span>
               </button>
               <button type="button" className="flex flex-col items-center pb-3 pt-2">
-                S <span className="mt-1 flex h-8 w-8 items-center justify-center font-semibold text-gray-900">16</span>
+                S <span className={`mt-1 flex h-8 w-8 items-center justify-center ${today === 6 ? "rounded-full bg-indigo-600 font-semibold text-white" : "font-semibold text-gray-900"}`}>{dates[6]}</span>
               </button>
             </div>
 
             <div className="-mr-px hidden grid-cols-7 divide-x divide-gray-100 border-r border-gray-100 text-sm leading-6 text-gray-500 sm:grid">
               <div className="col-end-1 w-14" />
               <div className="flex items-center justify-center py-3">
-                <span>
-                  Mon <span className="items-center justify-center font-semibold text-gray-900">10</span>
-                </span>
-              </div>
-              <div className="flex items-center justify-center py-3">
-                <span>
-                  Tue <span className="items-center justify-center font-semibold text-gray-900">11</span>
+                <span className="flex items-baseline">
+                  Sun <span className={`${today === 7 ? "ml-1.5 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white" : "items-center justify-center font-semibold text-gray-900 "}`}>
+                    {dates[0]}</span>
                 </span>
               </div>
               <div className="flex items-center justify-center py-3">
                 <span className="flex items-baseline">
-                  Wed{' '}
-                  <span className="ml-1.5 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white">
-                    12
-                  </span>
+                  Mon <span className={`${today === 1 ? "ml-1.5 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white" : "items-center justify-center font-semibold text-gray-900 "}`}>
+                    {dates[1]}</span>
                 </span>
               </div>
               <div className="flex items-center justify-center py-3">
-                <span>
-                  Thu <span className="items-center justify-center font-semibold text-gray-900">13</span>
+                <span className="flex items-baseline">
+                  Tue <span className={`${today === 2 ? "ml-1.5 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white" : "items-center justify-center font-semibold text-gray-900 "}`}>
+                    {dates[2]}</span>
                 </span>
               </div>
               <div className="flex items-center justify-center py-3">
-                <span>
-                  Fri <span className="items-center justify-center font-semibold text-gray-900">14</span>
+                <span className="flex items-baseline">
+                  Wed <span className={`${today === 3 ? "ml-1.5 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white" : "items-center justify-center font-semibold text-gray-900 "}`}>
+                    {dates[3]}</span>
                 </span>
               </div>
               <div className="flex items-center justify-center py-3">
-                <span>
-                  Sat <span className="items-center justify-center font-semibold text-gray-900">15</span>
+                <span className="flex items-baseline">
+                  Thu <span className={`${today === 4 ? "ml-1.5 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white" : "items-center justify-center font-semibold text-gray-900 "}`}>
+                    {dates[4]}</span>
                 </span>
               </div>
               <div className="flex items-center justify-center py-3">
-                <span>
-                  Sun <span className="items-center justify-center font-semibold text-gray-900">16</span>
+                <span className="flex items-baseline">
+                  Fri <span className={`${today === 5 ? "ml-1.5 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white" : "items-center justify-center font-semibold text-gray-900 "}`}>
+                    {dates[5]}</span>
+                </span>
+              </div>
+              <div className="flex items-center justify-center py-3">
+                <span className="flex items-baseline"> 
+                  Sat <span className={`${today === 6 ? "ml-1.5 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white" : "items-center justify-center font-semibold text-gray-900 "}`}>
+                    {dates[6]}</span>
                 </span>
               </div>
             </div>
