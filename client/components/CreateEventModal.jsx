@@ -21,8 +21,8 @@ const [eventName, setEventName] = useState('');
         const cookieValue = myCookie ? myCookie.split('=')[1] : null;
         event.preventDefault();
         const data = {
-            label: eventName,
-            hour: Number(eventStart) + Number(amPm),
+            label: eventName, //name, string
+            hour: Number(eventStart) + Number(amPm), // start our, float 
             day: eventDay, //day represented by num 1-7, integer
             length: eventDuration, //how long the event is, number with deciaml
             id: cookieValue //id of callendar

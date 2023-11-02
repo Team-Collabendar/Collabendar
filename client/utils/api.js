@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'http://localhost:3001';
 
 const api = {
     getEvents: async (inputData)  => {
@@ -9,6 +9,7 @@ const api = {
             },
             body: JSON.stringify(inputData),
         });
+        console.log('response is: ',await response.json())
         return await response.json();
     },
     createCollabendar: async (inputData) => {

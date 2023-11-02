@@ -42,13 +42,14 @@ export default function Example() {
 
   async function getEvents() {
     eventReq = await api.getEvents()
+    console.log(eventReq)
     setEventList(eventReq)
     console.log(stateEvents)
   }
 
   useEffect(() => {
     getEvents();
-
+    console.log(stateEvents)
     // Set the container scroll position based on the current time.
     const currentMinute = new Date().getHours() * 60
     container.current.scrollTop =
