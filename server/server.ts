@@ -39,10 +39,9 @@ app.post('/', async (req,res) => {
     return res.status(201).redirect('/');
   }
 
-  console.log(result);
-
   if (bcrypt.compare(req.body.password, account.password)){
-    res.status(201).redirect('/home')
+    // successful login
+    res.redirect('/home');
   } else { return res.status(201).redirect('/'); }
 
 })
