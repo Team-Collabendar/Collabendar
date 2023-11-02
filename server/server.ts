@@ -41,8 +41,10 @@ app.post('/', async (req,res) => {
     return res.status(201).redirect('/');
   }
 
+  console.log(account);
+
   if (bcrypt.compare(req.body.password, account.password)){
-    res.cookie(`user_id', ${account.id}`);
+    res.cookie('user_id', account.id);
     res.status(201).redirect('/home');
   } else { return res.status(201).redirect('/'); }
 
@@ -64,7 +66,7 @@ app.post('/register', async (req, res) => {
     let val = [username, hashedPassword]
     database.query(sent, val)
 
-    res.redirect('/home')
+    res.redirect('/')
   } catch (error) {
     res.redirect('/register')
   }
