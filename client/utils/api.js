@@ -2,7 +2,7 @@ const BASE_URL = 'http://localhost:3000';
 
 const api = {
     createCollabendar: async (inputData) => {
-        const response = await fetch(`${BASE_URL}/route/createGroup`, {
+        const response = await fetch(`${BASE_URL}/calendar`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -12,7 +12,7 @@ const api = {
         return await response.json();
     },
     invite: async (inputData) => {
-        const response = await fetch(`${BASE_URL}/route/invite`, {
+        const response = await fetch(`${BASE_URL}/calendar/invite`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
