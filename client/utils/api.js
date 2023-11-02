@@ -11,7 +11,6 @@ export const api = {
         });
         return await response.json();
     },
-    
     invite: async (inputData) => {
         const response = await fetch(`${BASE_URL}/route/invite`, {
             method: 'PUT',

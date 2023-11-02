@@ -24,7 +24,7 @@ for (let i = 0; i < 7; i++) {
     newDate.setDate(startOfWeek.getDate() + i);
     dates.push(newDate.toLocaleDateString('en-US', { day: 'numeric' }));
 }
-console.log(today);
+
 export default function Example() {
   const [isOpenCollab, setIsOpenCollab] = useState(false);
   const [isOpenInvite, setIsOpenInvite] = useState(false);
