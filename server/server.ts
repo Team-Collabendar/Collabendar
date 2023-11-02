@@ -8,12 +8,14 @@ const cors = require('cors');
 const path = require('path');
 const PORT = 3001;
 const bcrypt = require('bcrypt');
+const cookieParser = require('cookie-parser');
 import database from './database';
 
 
 app.use(express.urlencoded({extended : false}))
 app.use(express.json());
 app.use(cors());
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../dist')));
 app.use('/globals.css', express.static(path.join(__dirname, '../client/globals.css')))
 
@@ -40,8 +42,8 @@ app.post('/', async (req,res) => {
   }
 
   if (bcrypt.compare(req.body.password, account.password)){
-    // successful login
-    res.redirect('/home');
+    res.cookie(`user_id', ${account.id}`);
+    res.status(201).redirect('/home');
   } else { return res.status(201).redirect('/'); }
 
 })
