@@ -11,16 +11,15 @@ export default function CreateCollabendarModal({ openCheck, onClose }) {
             setSelectedCalendars([...selectedCalendars, calendar]);
         }
     };
-
-    const handleSubmit = async (event) => {
-        console.log('Selected calendars:', selectedCalendars);
+    
+    async function handleSubmit(event) {
         event.preventDefault();
-        onClose();
-
-        const data = new FormData(event.target);
+        console.log('Selected calendars:', selectedCalendars);
+        const data = { name: event.target[0].value, calendars: selectedCalendars }
         console.log('data is: ', data);
         if (data) await api.createCollabendar(data);
-    };
+        onClose();
+    }
 
     if (!openCheck) return null;
 

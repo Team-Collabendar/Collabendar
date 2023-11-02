@@ -3,11 +3,11 @@ import { api } from '../utils/api';
 
 export default function CreateCollabendarModal({ openCheck, onClose }) {
     async function handleSubmit(event) {
-        onClose();
         event.preventDefault();
-        const data = new FormData(event.target);
+        const data = { name: event.target[0].value }
         console.log('data is: ', data);
         if (data) await api.createCollabendar(data);
+        onClose();
     }
 
     if (!openCheck) return null;
