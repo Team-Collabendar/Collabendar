@@ -210,7 +210,7 @@ export default function Example() {
                 </Menu.Items>
               </Transition>
             </Menu>
-            <div className="ml-6 h-6 w-px bg-gray-300" />
+            
           </div>
           <div className="hidden md:ml-4 md:flex md:items-center">
             <Menu as="div" className="relative">
@@ -298,20 +298,6 @@ export default function Example() {
                           onClick = { () => menuHandler('invite') }
                         >
                           Invite
-                        </button>
-                      )}
-                    </Menu.Item>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <button
-                          href="#"
-                          className={classNames(
-                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                            'block px-4 py-2 text-sm'
-                          )}
-                          onClick = { () => menuHandler('logout') }
-                        >
-                          logout
                         </button>
                       )}
                     </Menu.Item>
@@ -439,6 +425,10 @@ export default function Example() {
             </Transition>
           </Menu>
         </div>
+        <form action="/logout?_method=DELETE" method="POST">
+            <button type="submit" className="ml-6 rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >Log Out</button>
+        </form>
       </header>
       <div ref={container} className="isolate flex flex-auto flex-col overflow-auto bg-white">
         <div style={{ width: '165%' }} className="flex max-w-full flex-none flex-col sm:max-w-none md:max-w-full">
