@@ -1,6 +1,6 @@
 const BASE_URL = 'http://localhost:3000';
 
-export const api = {
+const api = {
     createCollabendar: async (inputData) => {
         const response = await fetch(`${BASE_URL}/route/createGroup`, {
             method: 'POST',
@@ -21,15 +21,8 @@ export const api = {
         });
         return await response.json();
     },
-    logout: async () => {
-      const response = await fetch(`${BASE_URL}/route/logout`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      return await response.json();
-    },
-    
+
 
 };
+
+module.exports(api)
