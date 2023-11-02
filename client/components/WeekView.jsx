@@ -488,43 +488,43 @@ export default function Example() {
               <div className="col-end-1 w-14" />
               <div className="flex items-center justify-center py-3">
                 <span className="flex items-baseline">
-                  Sun <span className={`${today === 7 ? "ml-1.5 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white" : "items-center justify-center font-semibold text-gray-900 "}`}>
+                  Sun <span className={`${today === 7 ? "ml-1.5 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white" : "ml-1.5 flex h-8 w-8 items-center justify-center font-semibold text-gray-900 "}`}>
                     {dates[0]}</span>
                 </span>
               </div>
               <div className="flex items-center justify-center py-3">
                 <span className="flex items-baseline">
-                  Mon <span className={`${today === 1 ? "ml-1.5 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white" : "items-center justify-center font-semibold text-gray-900 "}`}>
+                  Mon <span className={`${today === 1 ? "ml-1.5 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white" : "ml-1.5 flex h-8 w-8 items-center justify-center font-semibold text-gray-900 "}`}>
                     {dates[1]}</span>
                 </span>
               </div>
               <div className="flex items-center justify-center py-3">
                 <span className="flex items-baseline">
-                  Tue <span className={`${today === 2 ? "ml-1.5 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white" : "items-center justify-center font-semibold text-gray-900 "}`}>
+                  Tue <span className={`${today === 2 ? "ml-1.5 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white" : "ml-1.5 flex h-8 w-8 items-center justify-center font-semibold text-gray-900 "}`}>
                     {dates[2]}</span>
                 </span>
               </div>
               <div className="flex items-center justify-center py-3">
                 <span className="flex items-baseline">
-                  Wed <span className={`${today === 3 ? "ml-1.5 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white" : "items-center justify-center font-semibold text-gray-900 "}`}>
+                  Wed <span className={`${today === 3 ? "ml-1.5 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white" : "ml-1.5 flex h-8 w-8 items-center justify-center font-semibold text-gray-900 "}`}>
                     {dates[3]}</span>
                 </span>
               </div>
               <div className="flex items-center justify-center py-3">
                 <span className="flex items-baseline">
-                  Thu <span className={`${today === 4 ? "ml-1.5 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white" : "items-center justify-center font-semibold text-gray-900 "}`}>
+                  Thu <span className={`${today === 4 ? "ml-1.5 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white" : "ml-1.5 flex h-8 w-8 items-center justify-center font-semibold text-gray-900 "}`}>
                     {dates[4]}</span>
                 </span>
               </div>
               <div className="flex items-center justify-center py-3">
                 <span className="flex items-baseline">
-                  Fri <span className={`${today === 5 ? "ml-1.5 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white" : "items-center justify-center font-semibold text-gray-900 "}`}>
+                  Fri <span className={`${today === 5 ? "ml-1.5 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white" : "ml-1.5 flex h-8 w-8 items-center justify-center font-semibold text-gray-900 "}`}>
                     {dates[5]}</span>
                 </span>
               </div>
               <div className="flex items-center justify-center py-3">
                 <span className="flex items-baseline"> 
-                  Sat <span className={`${today === 6 ? "ml-1.5 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white" : "items-center justify-center font-semibold text-gray-900 "}`}>
+                  Sat <span className={`${today === 6 ? "ml-1.5 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white" : "ml-1.5 flex h-8 w-8 items-center justify-center font-semibold text-gray-900 "}`}>
                     {dates[6]}</span>
                 </span>
               </div>
@@ -686,7 +686,7 @@ export default function Example() {
               </div>
 
               {/* Vertical lines */}
-              <div className="col-start-1 col-end-2 row-start-1 hidden grid-cols-7 grid-rows-1 divide-x divide-gray-100 sm:grid sm:grid-cols-7">
+              <div className="col-start-1 col-end-2 row-start-1 grid-cols-7 grid-rows-1 divide-x divide-gray-100 sm:grid sm:grid-cols-7">
                 <div className="col-start-1 row-span-full" />
                 <div className="col-start-2 row-span-full" />
                 <div className="col-start-3 row-span-full" />
