@@ -51,41 +51,50 @@ export default function Example() {
     return
   };
 
-  const eventArray = [
-    <li className="relative mt-px flex sm:col-start-3" style={{ gridRow: '74 / span 12' }}>
-    <a
-      href="#"
-      className="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-blue-50 p-2 text-xs leading-5 hover:bg-blue-100"
-    >
-      <p className="order-1 font-semibold text-blue-700">Breakfast</p>
-      <p className="text-blue-500 group-hover:text-blue-700">
-        <time dateTime="2022-01-12T06:00">6:00 AM</time>
-      </p>
-    </a>
-  </li>,
-  <li className="relative mt-px flex sm:col-start-3" style={{ gridRow: '92 / span 30' }}>
-    <a
-      href="#"
-      className="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-pink-50 p-2 text-xs leading-5 hover:bg-pink-100"
-    >
-      <p className="order-1 font-semibold text-pink-700">Flight to Paris</p>
-      <p className="text-pink-500 group-hover:text-pink-700">
-        <time dateTime="2022-01-12T07:30">7:30 AM</time>
-      </p>
-    </a>
-  </li>,
-  <li className="relative mt-px hidden sm:col-start-6 sm:flex" style={{ gridRow: '122 / span 24' }}>
-    <a
-      href="#"
-      className="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-gray-100 p-2 text-xs leading-5 hover:bg-gray-200"
-    >
-      <p className="order-1 font-semibold text-gray-700">Meeting with design team at Disney</p>
-      <p className="text-gray-500 group-hover:text-gray-700">
-        <time dateTime="2022-01-15T10:00">10:00 AM</time>
-      </p>
-    </a>
-  </li>
-  ];
+  const eventArray = stateEvents.map((event) => {
+    const testNum = 2;
+    let generatedClassName = '';
+    console.log(event.day);
+    switch (String(event.day)) {
+      case '1':
+        generatedClassName = "relative mt-px flex sm:col-start-1";
+        break;
+      case '2':
+        generatedClassName = "relative mt-px flex sm:col-start-2";
+        break;
+      case '3':
+        generatedClassName = "relative mt-px flex sm:col-start-3";
+        break;
+      case '4':
+        generatedClassName = "relative mt-px flex sm:col-start-4";
+        break;
+      case '5':
+        generatedClassName = "relative mt-px flex sm:col-start-5";
+        break;
+      case '6':
+        generatedClassName = "relative mt-px flex sm:col-start-6";
+        break;
+      case '7':
+        generatedClassName = "relative mt-px flex sm:col-start-7";
+        break;
+      default:
+        generatedClassName = "relative mt-px flex sm:col-start-1";
+        break;
+    }
+    return (
+      <li className={generatedClassName} style={{ gridRow: `${(event.hour * 12) + 2} / span ${event.length * 12}` }}>
+        <a
+          href="#"
+          className="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-blue-50 p-2 text-xs leading-5 hover:bg-blue-100"
+        >
+          <p className="order-1 font-semibold text-blue-700">{event.label}</p>
+          <p className="text-blue-500 group-hover:text-blue-700">
+            <time dateTime="2022-01-12T06:00">{`${event.hour} o'clock`}</time>
+          </p>
+        </a>
+      </li>
+    )
+  })
 
   return (
     <div className="flex h-full flex-col">
