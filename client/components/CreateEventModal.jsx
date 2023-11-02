@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addEvent } from '../reducers/eventsSlice';
+import api from '../utils/api';
 export default function CreateEventModal({ openCheck, onClose }) {
-    const [eventName, setEventName] = useState('');
+
+const [eventName, setEventName] = useState('');
     const [eventStart, setEventStart] = useState('');
     const [eventDay, setEventDay] = useState('');
     const [eventDuration, setEventDuration] = useState('');
@@ -15,24 +17,21 @@ export default function CreateEventModal({ openCheck, onClose }) {
       
 
     async function handleSubmit(event) {
-        onClose();
+        const allCookies = document.cookie;
+        const myCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('user_id='));
+        const cookieValue = myCookie ? myCookie.split('=')[1] : null;
         event.preventDefault();
-        
         const data = {
             label: eventName,
             hour: Number(eventStart) + Number(amPm),
             day: eventDay,
-            length: eventDuration
+            length: eventDuration,
+            id: cookieValue
         }
-
         addEventObj(data.hour, data.length, data.label, data.day);
-
-        console.log('data is: ', data);
-
-        // Use the state values or FormData to dispatch an action or make an API call
         dispatch(addEvent({ eventName, eventStart, eventDay, eventDuration }));
-        // OR
-        // await api.createCollabendar(data);
+        if (data) await api.createEvent(data);
+        onClose();
     }
 
     if (!openCheck) return null;
@@ -49,13 +48,13 @@ export default function CreateEventModal({ openCheck, onClose }) {
                         </select>
                     </div>
                     <select id='eventDaySelect' onChange={(e) => setEventDay(e.target.value)}>
-                        <option value="1">Monday</option>
-                        <option value="2">Tuesday</option>
-                        <option value="3">Wednesday</option>
-                        <option value="4">Thursday</option>
-                        <option value="5">Friday</option>
-                        <option value="6">Saturday</option>
-                        <option value="7">Sunday</option>
+                        <option value="1">Sunday</option>
+                        <option value="2">Monday</option>
+                        <option value="3">Tuesday</option>
+                        <option value="4">Wednesday</option>
+                        <option value="5">Thursday</option>
+                        <option value="6">Friday</option>
+                        <option value="7">Saturday</option>
                     </select>
                     <input name='eventDuration' value={eventDuration} placeholder='Event Duration' className="border p-2 rounded-md" onChange={(e) => setEventDuration(e.target.value)} />
                     <button type='submit' className="bg-blue-500 text-white px-4 py-2 rounded-md">Submit</button>

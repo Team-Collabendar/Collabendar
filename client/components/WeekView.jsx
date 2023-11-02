@@ -50,10 +50,6 @@ export default function Example() {
       1440
   }, [isOpenCollab])
 
-  //set a create group modal, invite user modal is open variable
-  //create group & invite modal component
-  //on sumbit, send await api command with modal information
-
   async function menuHandler(cmd){
     try {
       if (cmd === 'createCollab') setIsOpenCollab(true);

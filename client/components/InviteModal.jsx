@@ -14,7 +14,7 @@ export default function CreateCollabendarModal({ openCheck, onClose }) {
     
     async function handleSubmit(event) {
         const allCookies = document.cookie;
-        const myCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('cookieName='));
+        const myCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('user_id='));
         const cookieValue = myCookie ? myCookie.split('=')[1] : null;
 
 
