@@ -51,6 +51,8 @@ export default function Example() {
     return
   };
 
+
+  
   const eventArray = stateEvents.map((event) => {
     const testNum = 2;
     let generatedClassName = '';
