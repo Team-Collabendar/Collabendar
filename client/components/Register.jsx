@@ -1,22 +1,27 @@
 import React from "react"
-export default function Login() {
-  
+
+export default function Register() {
   return (
     <>
+      {/*
+        This example requires updating your template:
+
+        ```
+        <html class="h-full bg-gray-50">
+        <body class="h-full">
+        ```
+      */}
       <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          
+        
           <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Sign in to your account
+            Create your account
           </h2>
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
-          <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
-    
-          <form className="space-y-6" action="/" method="POST">
-
-            {/* <form className="space-y-6" action="/login" method="POST"> */}
+          <div className="bg-blue-100 px-6 py-12 shadow sm:rounded-lg sm:px-12">
+            <form className="space-y-6" action="/register" method="POST">
               <div>
                 <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                   Email address
@@ -74,7 +79,7 @@ export default function Login() {
                   type="submit"
                   className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
-                  Sign in
+                   Create Account
                 </button>
               </div>
             </form>
@@ -91,21 +96,21 @@ export default function Login() {
 
               <div className="mt-6 grid grid-cols-1 gap-4">
                 <a
-                  href="/login/federated/google"
+                  href="#"
                   className="flex w-full items-center justify-center gap-3 rounded-md bg-[#4285F4] px-3 py-1.5 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1D9BF0]"
                 >
                   
                   <span className="text-sm font-semibold leading-6">Google</span>
                 </a>
-
               </div>
             </div>
           </div>
 
           <p className="mt-10 text-center text-sm text-gray-500">
-            Not a member?{' '}
-            <a href="/register" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-              Create A Account
+            {' '}
+            {/* <a href="/login" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"> */}
+            <a href="/" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+              Login
             </a>
           </p>
         </div>
