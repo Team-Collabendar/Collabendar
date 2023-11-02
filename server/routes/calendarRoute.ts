@@ -21,7 +21,6 @@ calendarRouter.get('/userCalendars', calendar.getCalendarsByUser, (req, res, nex
 
 
 calendarRouter.put('/invite', calendar.addUser, (req,res,next) => {
-
 })
 
 

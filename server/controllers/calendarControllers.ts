@@ -21,6 +21,10 @@ calendarControllers.createCalendar = (req, res, next, ) => { // req.body.calenda
 }
 
 //NEED TO --> add user to our bridge table for users / calendars
+// NEED TO HAVE req.body.calendar_id for the given calendar we want to add user to
+    //or whatever the correct req.body property is for the given calendar we want to add to
+      //we may need to run a helper function to query the database by calendar NAME and get it's ID so we can add users to the join table
+
 calendarControllers.addUser = (req, res, next) => {
   const text = 'INSERT INTO user_calendars(user_id,calendar_id) VALUES ($1, $2)'
   let calendar;

@@ -15,7 +15,9 @@ const calendarRoute = require('./routes/calendarRoute');
 const userRoute = require('./routes/userRoute');
 const eventRoute = require('./routes/eventRoute');
 
-
+app.use('/calendar', calendarRoute);
+app.use('/user', userRoute);
+app.use('/event', eventRoute);
 
 
 app.use(express.urlencoded({extended : false}))

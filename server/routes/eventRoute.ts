@@ -14,10 +14,16 @@ eventRouter.get('/', event.getEventsByCal, (req, res) => {
 //SHOULD WE HAVE ANOTHER ROUTE? eventRouter.get('event') -->that just gets one single event, when you click and wanna display more info on it?
 
 
-//create event
-eventRouter.post('/', event.createEvent, event.getEventsByCal, (req, res) => {
+//get all events for quick and dirty display
+eventRouter.post('/getEvents', event.getAllEvents, (req, res) => {
+  return res.status(200).json(res.locals.events)
+})
+
+
+//create event --> used to have the event.getEventsByCal middleware in here to send back all events 
+eventRouter.post('/', event.createEvent, (req, res) => {
       //if we need it we also have the object for this single event as "res.locals.newEvent" here
-  return res.status(200).json(res.locals.eventsByCal)
+  return res.status(200).json(res.locals.newEvent)
 })
 
 
