@@ -6,7 +6,7 @@ const eventControllers: any = {}
 
 eventControllers.createEvent = (req, res, next) => {
   if (req.body.event){
-    const text = "INSER INTO events (title, date, start_time, duration, calendar_id) VALUES ($1, $2, $3, $4, $5) RETURNING *"
+    const text = "INSER INTO events (label, day, hour, length, calendar_id) VALUES ($1, $2, $3, $4, $5) RETURNING *"
     const values = [req.body.label, req.body.day, req.body.hour, req.body.length, req.body.id]
     db.query(text, values, (err, result)=> {
         if (err){
@@ -77,7 +77,7 @@ eventControllers.getEventsByCal = (req, res, next) => {
 eventControllers.editEvent = (req, res, next) => {
   //REFACTOR? - yeah, see notes below...
   if (req.body.event.title){// DIFFERENT based on actual req.body
-    const text = "UPDATE events SET (title = req.event.title) WHERE (id = req.body.event.id) RETURNING *" // THIS WILL BE DIFFERENT BASED ON REQ.BODY
+    const text = "UPDATE events SET (label = req.event.label) WHERE (id = req.body.event.id) RETURNING *" // THIS WILL BE DIFFERENT BASED ON REQ.BODY
     const values = [] // wait... how do you use values for an update query again?
     db.query(text, values, (err, result)=> {
       if (err){
@@ -93,8 +93,8 @@ eventControllers.editEvent = (req, res, next) => {
   ////DEPENDING on which req.body properties exist... you need to iteratively append to 'text' and push to 'values'... in order 
   ////OTHERWISE... you have to try some shit like what's immediately below.. which won't even cover all use cases 
   //
-  // if (req.body.event.title){// DIFFERENT based on rew.body
-  //   const text = "UPDATE events SET title = req.event.title WHERE id = req.body.event.id RETURNING *" // THIS WILL BE DIFFERENT BASED ON REQ.BODY
+  // if (req.body.event.day){// DIFFERENT based on req.body
+  //   const text = "UPDATE events SET day = req.event.day WHERE id = req.body.event.id RETURNING *" // THIS WILL BE DIFFERENT BASED ON REQ.BODY
   //   const values = [] 
   //   db.query(text, values, (err, result)=> {
   //     if (err){
