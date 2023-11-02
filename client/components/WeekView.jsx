@@ -56,11 +56,8 @@ export default function Example() {
 
   async function menuHandler(cmd){
     try {
-      if (cmd) console.log('The command is',cmd);
       if (cmd === 'createCollab') setIsOpenCollab(true);
       if (cmd === 'invite') setIsOpenInvite(true);
-      if (cmd === 'logout') await api.logout();
-
     } catch (error) {
       console.error('Error: ',error, 'in handling menu action: ', cmd)
     }

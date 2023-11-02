@@ -3,8 +3,15 @@ import api from '../utils/api';
 
 export default function CreateCollabendarModal({ openCheck, onClose }) {
     async function handleSubmit(event) {
+        const allCookies = document.cookie;
+        console.log (allCookies)
+        const myCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('cookieName='));
+        console.log (myCookie)
+
+        const cookieValue = myCookie ? myCookie.split('=')[1] : null;
+
         event.preventDefault();
-        const data = { name: event.target[0].value }
+        const data = { name: event.target[0].value, userID: cookieValue }
         console.log('data is: ', data);
         if (data) await api.createCollabendar(data);
         onClose();
