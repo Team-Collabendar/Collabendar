@@ -8,10 +8,6 @@ const calendarRoute = require('./routes/calendarRoute');
 const userRoute = require('./routes/userRoute');
 const eventRoute = require('./routes/eventRoute');
 
-// const {} = require('calendarControllers');
-// const {} = require('userControllers');
-// const {} = require('eventControllers');
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
@@ -23,15 +19,18 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist', 'index.html'));
 });
 
+
+
 app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist', 'index.html'));
 });
 
+
+
+//ROUTES --> to where the routes actually live / middleware is run (see imports above)
 app.use('/calendar', calendarRoute);
 app.use('/user', userRoute);
 app.use('/event', eventRoute);
-
-
 
 
 
