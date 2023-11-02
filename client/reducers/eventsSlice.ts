@@ -31,10 +31,13 @@ export const eventSlice = createSlice({
   reducers: {
     addEvent: (state, action: PayloadAction<Event>) => {
       state.eventsList.push(action.payload);
+    },
+    removeEvent: (state, action: PayloadAction<String>) => {
+      state.eventsList = state.eventsList.filter((event) => event.label !== action.payload);
     }
   }
 })
 
-export const { addEvent } = eventSlice.actions;
+export const { addEvent, removeEvent } = eventSlice.actions;
 
 export default eventSlice.reducer;

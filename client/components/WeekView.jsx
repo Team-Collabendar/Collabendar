@@ -8,6 +8,9 @@ function classNames(...classes) {
 }
 console.log('hello');
 export default function Example() {
+  const [isOpenEvent, setIsOpenEvent] = useState(false);
+
+
   const dispatch = useDispatch();
   const container = useRef(null)
   const containerNav = useRef(null)
@@ -27,7 +30,6 @@ export default function Example() {
 
   function addEventObj(hour, length, label, day) {
     dispatch(addEvent({hour: hour, length: length, label: label, day: day}));
-    console.log('added event');
   }
 
 
