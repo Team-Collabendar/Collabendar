@@ -134,6 +134,10 @@ export default function Example() {
             >
               Add event
             </button>
+            <form action="/logout?_method=DELETE" method="POST">
+  <button type="submit" className="ml-6 rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >Log Out</button>
+</form>
           </div>
           <Menu as="div" className="relative ml-6 md:hidden">
             <Menu.Button className="-mx-2 flex items-center rounded-full border border-transparent p-2 text-gray-400 hover:text-gray-500">
