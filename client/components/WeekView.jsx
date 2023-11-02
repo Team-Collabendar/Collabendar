@@ -229,6 +229,32 @@ export default function Example() {
                           
                         >
                           Collabendars
+                          <div className="w-1">
+                            <ol className="mt-3">
+                                <li className="flex items-center">
+                                    <input
+                                        type="checkbox"
+                                        name="calendars"
+                                        value="Personal Calendar"
+                                        // checked={selectedCalendars.includes('Personal Calendar')}
+                                        // onChange={() => handleCheckboxChange('Personal Calendar')}
+                                        className="mr-2"
+                                    />
+                                    <label className="cursor-pointer">Personal Calendar</label>
+                                </li>
+                                <li className="flex items-center">
+                                    <input
+                                        type="checkbox"
+                                        name="calendars"
+                                        value="Codesmith Calendar"
+                                        // checked={selectedCalendars.includes('Codesmith Calendar')}
+                                        // onChange={() => handleCheckboxChange('Codesmith Calendar')}
+                                        className="mr-2"
+                                    />
+                                    <label className="cursor-pointer">Codesmith Calendar</label>
+                                </li>
+                            </ol>
+                        </div>
                         </ol>
                       )}
                     </Menu.Item>
