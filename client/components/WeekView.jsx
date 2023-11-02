@@ -5,18 +5,25 @@ import { api } from '../utils/api';
 import CreateCollabendarModal from './CreateCollabendar';
 import InviteModal from './InviteModal'
 import { useState } from 'react';
-
+import { useDispatch, useSelector} from 'react-redux';
+import { addEvent } from '../reducers/eventsSlice';
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function Example() {
+  const [isOpenEvent, setIsOpenEvent] = useState(false);
   const [isOpenCollab, setIsOpenCollab] = useState(false);
   const [isOpenInvite, setIsOpenInvite] = useState(false);
+  
+  const dispatch = useDispatch();
 
   const container = useRef(null)
   const containerNav = useRef(null)
   const containerOffset = useRef(null)
+  const stateEvents = useSelector(state => state.events.eventsList);
+
+
 
   useEffect(() => {
     // Set the container scroll position based on the current time.
