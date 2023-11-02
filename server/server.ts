@@ -16,46 +16,13 @@ const initializePassport = require('./passport.config')
 import database from './database';
 
 
-// initializePassport(
-//   passport,
-//   email =>  users.find(user => user.email === email),
-//   id => users.find(user => user.id === id)
-// )
-// initializePassport(
-//   passport,
-//   async (email) => {
-//         const user = await database.query(`SELECT * FROM users WHERE username = '${email}'`);
-//         return user.rows[0].username; 
-//       },
-//   id => users.find(user => user.id === id)
-// )
-
-// async function test (){
-//   const emailArr = await database.query(`SELECT * FROM users WHERE username = '${email}'`)
-//   console.log(emailArr.rows[0].username);
-//   return emailArr.rows[0].username
-// }
-// test();
-
-// initializePassport(
-//   passport,
-//   async (email) => {
-//     const user = await database.query(`SELECT * FROM users WHERE username = '${email}'`);
-//     return user.rows[0].username; // Assuming the first row is the user
-//   },
-//   (id) => {
-//     // Replace this with your actual logic to find a user by their ID
-//     return users.find((user) => user.id === id);
-//   }
-// );
-
-
 
 initializePassport(
   passport,
   email =>  users.find(user => user.email === email),
   id => users.find(user => user.id === id)
 )
+
 const users = [];
 
 
@@ -71,11 +38,13 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }))
+
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
 
 app.get('/', checkAuthenticated, async (req, res) => {
+
   res.sendFile(path.join(__dirname, '../dist', 'index.html'));
 });
 
